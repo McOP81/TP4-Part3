@@ -1,5 +1,6 @@
 package ma.fsm.tp4part3.web;
 
+import ma.fsm.tp4part3.dtos.PaymentDTO;
 import ma.fsm.tp4part3.entities.Payment;
 import ma.fsm.tp4part3.entities.PaymentStatus;
 import ma.fsm.tp4part3.entities.PaymentType;
@@ -82,11 +83,11 @@ public class PaymentRestController {
     }
 
     @PostMapping(path = "/payments", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment savePayment(@RequestParam MultipartFile file, LocalDate date, double amount, PaymentType type, String studentCode) throws IOException {
-       return this.paymentService.savePayment(file, date, amount, type, studentCode);
+    public Payment savePayment(@RequestParam("file") MultipartFile file, PaymentDTO paymentDTO) throws IOException {
+       return this.paymentService.savePayment(file, paymentDTO);
     }
 
-    @GetMapping(path = "/paymentFile/{paymentId}",produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(path = "/payments/{paymentId}/file",produces = MediaType.APPLICATION_PDF_VALUE)
     public byte[] getPaymentFile (@PathVariable Long paymentId) throws IOException {
         return paymentService.getPaymentFile(paymentId);
     }

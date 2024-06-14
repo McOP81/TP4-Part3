@@ -14,5 +14,6 @@ public class PaymentDTO {
     private LocalDate date;
     private double amount;
     private PaymentType type;
+    private String studentCode;
     private PaymentStatus status;
 }

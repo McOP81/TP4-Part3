@@ -1,6 +1,7 @@
 package ma.fsm.tp4part3.services;
 
 import jakarta.transaction.Transactional;
+import ma.fsm.tp4part3.dtos.PaymentDTO;
 import ma.fsm.tp4part3.entities.Payment;
 import ma.fsm.tp4part3.entities.PaymentStatus;
 import ma.fsm.tp4part3.entities.PaymentType;
@@ -30,7 +31,7 @@ public class PaymentService {
         this.studentRepository = studentRepository;
         this.paymentRepository = paymentRepository;
     }
-    public Payment savePayment(MultipartFile file, LocalDate date, double amount, PaymentType type, String studentCode) throws IOException {
+    public Payment savePayment(MultipartFile file, PaymentDTO paymentDTO) throws IOException {
         Path folderPath = Paths.get(System.getProperty("user.home"),"TP4-Part3","payments");
         if (!Files.exists(folderPath)){
             Files.createDirectories(folderPath);
@@ -38,10 +39,10 @@ public class PaymentService {
         String fileName = UUID.randomUUID().toString();
         Path filePath = Paths.get(System.getProperty("user.home"),"TP4-Part3","payments",fileName+".pdf");
         Files.copy(file.getInputStream(), filePath);
-        Student student = studentRepository.findByCode(studentCode);
+        Student student = studentRepository.findByCode(paymentDTO.getStudentCode());
         Payment payment = Payment.builder()
-                .date(date).type(type).student(student)
-                .amount(amount)
+                .date(paymentDTO.getDate()).type(paymentDTO.getType()).student(student)
+                .amount(paymentDTO.getAmount())
                 .file(filePath.toUri().toString())
                 .status(PaymentStatus.CREATED)
                 .build();

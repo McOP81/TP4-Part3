@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AdminTemplateComponent } from './admin-template/admin-template.component';
-import {MatToolbar} from "@angular/material/toolbar";
+import {MatToolbar, MatToolbarModule} from "@angular/material/toolbar";
 import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatMenu, MatMenuModule} from "@angular/material/menu";
@@ -29,6 +29,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatSort, MatSortModule} from "@angular/material/sort";
+import { StudentDetailsComponent } from './student-details/student-details.component';
+import { NewPaymentComponent } from './new-payment/new-payment.component';
+import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {MatProgressSpinner, MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatDatepickerModule, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {PdfViewerComponent, PdfViewerModule} from "ng2-pdf-viewer";
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+
 
 @NgModule({
   declarations: [
@@ -41,12 +50,16 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
     LoginComponent,
     StudentsComponent,
     PaymentsComponent,
-    DashboardComponent
+    DashboardComponent,
+    StudentDetailsComponent,
+    NewPaymentComponent,
+    PaymentDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbar,
+    MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
@@ -59,7 +72,12 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    PdfViewerModule,
   ],
   providers: [
     provideAnimationsAsync(), AuthGuard, AuthorizationGuard
